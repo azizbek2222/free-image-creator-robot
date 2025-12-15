@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>⚡️ AI Rasm Generator (Premium Style)</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <script src='//libtl.com/sdk.js' data-zone='10326272' data-sdk='show_10326272'></script>
+    
     <style>
         /* Ranglar palitrasi (Ko'k-yashil ohanglar) */
         :root {
@@ -149,7 +152,7 @@
             }
         }
     </style>
-    </head>
+</head>
 <body>
 
 <div class="container">
@@ -232,7 +235,7 @@
         };
     }
 
-    // --- Reklama bilan rasm yaratish funksiyasi (YANGILANGAN) ---
+    // --- Reklama bilan rasm yaratish funksiyasi ---
     function generateImage() {
         const userPrompt = document.getElementById('prompt').value.trim();
 
@@ -241,14 +244,14 @@
             return;
         }
         
-        // Monetag funksiyasi mavjudligini tekshirish
+        // Monetag funksiyasi mavjudligini tekshirish (Endi SDK ulangan)
         if (typeof show_10326272 === 'function') {
             
             // Reklamani ko'rsatish
             show_10326272().then(() => {
                 // Reklama muvaffaqiyatli ko'rildi
                 console.log('Foydalanuvchi reklamani koʻrdi. Rasm yaratish boshlanmoqda.');
-                alert('Reklamani koʻrganingiz uchun rahmat! Rasm yaratilmoqda.'); // Foydalanuvchi uchun xabar
+                alert('Reklamani koʻrganingiz uchun rahmat! Rasm yaratilmoqda.'); 
                 createPollinationsImage(); // Rasm yaratishni boshlash
             }).catch(() => {
                 // Reklama muvaffaqiyatsiz tugadi (Masalan, o'tkazib yuborildi)
@@ -258,8 +261,8 @@
             });
 
         } else {
-            // Agar Monetag SDK yuklanmagan bo'lsa
-            console.warn("Monetag SDK (show_10326272) topilmadi. To'g'ridan-to'g'ri rasm yaratishga urinilmoqda.");
+            // Agar Monetag SDK funksiyasi (show_10326272) topilmasa
+            console.warn("Monetag SDK funksiyasi topilmadi. To'g'ridan-to'g'ri rasm yaratishga urinilmoqda.");
             alert("Reklama xizmati yuklanmadi. Rasm yaratishni boshlash.");
             createPollinationsImage();
         }
