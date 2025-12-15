@@ -6,13 +6,13 @@
     <title>⚡️ AI Rasm Generator (Premium Style)</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Ranglar palitrasi (Ko'k-yashil ohanglar) */
+        /* YANGI Ranglar palitrasi (Qizil-Sariq ohanglar) */
         :root {
-            --primary-color: #00bcd4; /* Cyan - Asosiy rang */
-            --primary-dark: #0097a7;
-            --secondary-color: #8bc34a; /* Och yashil - Ikkilamchi rang */
-            --bg-color: #e0e5ec; /* Yumshoq Neumorphic fon */
-            --text-color: #3f51b5; /* Indigoda matn */
+            --primary-color: #ff9800; /* To'q Sariq (Amber) - Asosiy rang */
+            --primary-dark: #f57c00;  /* To'qroq Sariq */
+            --secondary-color: #f44336; /* Qizil - Ikkilamchi rang */
+            --bg-color: #e0e5ec; /* Yumshoq Neumorphic fon (O'zgarmadi) */
+            --text-color: #d32f2f; /* To'q Qizil/Qizg'ish matn */
             --shadow-light: #ffffff;
             --shadow-dark: #a3b1c6;
         }
@@ -135,6 +135,15 @@
             display: none;
             margin-top: 20px;
         }
+
+        /* Dizayn rasmi uchun (Avvalgi rasm qo'shilgan joydan olib tashlandi, faqat stil qoldi) */
+        #designImage {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+        }
         
         /* Planshet va Kompyuter uchun moslashuv */
         @media (min-width: 768px) {
@@ -155,6 +164,8 @@
 
 <div class="container">
     <h1>🎨 AI Image Creator</h1>
+
+
 
     <label for="prompt">Image Text (Prompt):</label>
     <input type="text" id="prompt" placeholder="Misol: Tungi shaharda uchib ketayotgan ajdaho, neon yorug'lik">
