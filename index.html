@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta name="google-site-verification" content="g3wuBCS118ipXpmUl4hwAlVWPoBHbYshz4nYHoHPT30" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- SEO TITLE -->
+    <title>Free AI Image Generator – Turn Text Into Images Online</title>
+
+    <!-- SEO DESCRIPTION -->
+    <meta name="description" content="Which AI bots can create images? Use this free AI image generator to turn text into visuals instantly. Enter a prompt, choose a style, and generate images online for free.">
+
+    <!-- SEO KEYWORDS -->
+    <meta name="keywords" content="free ai image generator, ai image creator, text to image ai, bepul rasm yaratish, suniy intellekt rasm">
+
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph (Google / Telegram / Facebook) -->
+    <meta property="og:title" content="Free AI Image Generator – Turn Text Into Images Online">
+    <meta property="og:description" content="Create images from text using a free AI image generator. Choose styles, enter a prompt, and instantly generate visuals online.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://azizbek2222.github.io/ai-image-creator-robot/">
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* YANGI Ranglar palitrasi (Qizil-Sariq ohanglar) */
+        :root {
+            --primary-color: #ff9800; /* To'q Sariq (Amber) - Asosiy rang */
+            --primary-dark: #f57c00;  /* To'qroq Sariq */
+            --secondary-color: #f44336; /* Qizil - Ikkilamchi rang */
+            --bg-color: #e0e5ec; /* Yumshoq Neumorphic fon (O'zgarmadi) */
+            --text-color: #d32f2f; /* To'q Qizil/Qizg'ish matn */
+            --shadow-light: #ffffff;
+            --shadow-dark: #a3b1c6;
+        }
+
+        /* Umumiy uslublar */
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        /* Neumorphic kartochka */
+        .container {
+            width: 100%;
+            max-width: 450px; /* Mobilga optimallashtirilgan torlik */
+            margin: 25px;
+            background: var(--bg-color);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 
+                7px 7px 15px var(--shadow-dark),
+                -7px -7px 15px var(--shadow-light);
+        }
+        
+        /* Sarglavha */
+        h1 {
+            text-align: center;
+            color: var(--primary-dark);
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-shadow: 1px 1px 1px var(--shadow-light);
+        }
+
+        /* Neumorphic kirish maydonlari */
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        input[type="text"], select {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 10px;
+            box-sizing: border-box;
+            background-color: var(--bg-color);
+            box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -3px -3px 7px var(--shadow-light);
+            color: var(--text-color);
+            transition: all 0.2s ease-in-out;
+        }
+        input[type="text"]:focus, select:focus {
+            outline: none;
+            box-shadow: inset 1px 1px 2px var(--shadow-dark), inset -1px -1px 2px var(--shadow-light);
+        }
+
+        /* Boshqaruv elementlari joylashuvi */
+        .controls {
+            display: flex;
+            flex-direction: column; 
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        /* Neumorphic tugmalar */
+        .button-style {
+            width: 100%;
+            padding: 15px;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 700;
+            transition: all 0.2s ease-in-out;
+            margin-top: 15px;
+            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
+        }
+        .button-style:hover {
+            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
+        }
+        .button-style:active {
+            box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -3px -3px 7px var(--shadow-light);
+            transform: scale(0.98);
+        }
+
+        #generateBtn {
+            background-color: var(--primary-color);
+            color: var(--bg-color);
+        }
+        #downloadBtn {
+            background-color: var(--secondary-color);
+            color: var(--bg-color);
+            display: none;
+        }
+        
+        /* Natija qismi */
+        #resultContainer {
+            margin-top: 35px;
+            text-align: center;
+            padding-top: 20px;
+        }
+        #resultImage {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+            margin: 20px auto;
+            display: none;
+        }
+        .loading {
+            color: var(--primary-color);
+            font-weight: 600;
+            display: none;
+            margin-top: 20px;
+        }
+
+        /* Dizayn rasmi uchun (Avvalgi rasm qo'shilgan joydan olib tashlandi, faqat stil qoldi) */
+        #designImage {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+        }
+        
+        /* Planshet va Kompyuter uchun moslashuv */
+        @media (min-width: 768px) {
+            .container {
+                max-width: 600px;
+            }
+            .controls {
+                flex-direction: row;
+            }
+            .controls > div {
+                flex: 1;
+            }
+        }
+    </style>
+    <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
+</head>
+<body>
+
+<div class="container">
+    <h1>🎨 AI Image Creator</h1>
+
+
+
+    <label for="prompt">Image Text (Prompt):</label>
+    <input type="text" id="prompt" placeholder="Misol: Tungi shaharda uchib ketayotgan ajdaho, neon yorug'lik">
+
+    <div class="controls">
+        <div>
+            <label for="style">Select Image Style:</label>
+            <select id="style">
+                <option value=", hyperrealistic, cinematic lighting, 8k">Realistic (Hyperrealistic)</option>
+                <option value=", anime, manga style, vibrant colors">Anime (Manga Style)</option>
+                <option value=", oil painting, masterpiece, artistic">Art (Oil Painting)</option>
+                <option value=", fantasy art, dramatic lighting, epic">Fantasy (Epic Fantasy)</option>
+            </select>
+        </div>
+        <div>
+            <label for="size">Image Size:</label>
+            <select id="size">
+                <option value="512x512">Square (512x512)</option>
+                <option value="768x512">Landscape (768x512)</option>
+                <option value="512x768">Portrait (512x768)</option>
+                <option value="1024x1024">High quality (1024x1024)</option>
+            </select>
+        </div>
+    </div>
+
+    <button id="generateBtn" class="button-style" onclick="generateImage()">🚀 CREATING A PICTURE</button>
+
+    <div id="resultContainer">
+        <p class="loading" id="loadingMessage">⏳ Image is being created, please wait....</p>
+        <img id="resultImage" alt="The created image will appear here">
+        <button id="downloadBtn" class="button-style" onclick="downloadImage()">⬇️ DOWNLOAD IMAGE</button>
+        <p style="margin-top: 15px; font-size: 14px; color: #757575;">*If the download button doesn't work, long press on the image and select "Save image".</p>
+    </div>
+</div>
+
+<script>
+    // --- AdsGram integratsiyasi boshlanishi ---
+    
+    // Asosiy rasm yaratish logikasini alohida funksiyaga o'tkazamiz
+    function createPollinationsImage() {
+        const userPrompt = document.getElementById('prompt').value.trim();
+        const styleSuffix = document.getElementById('style').value;
+        const sizeValue = document.getElementById('size').value;
+        const [width, height] = sizeValue.split('x');
+
+        const resultImage = document.getElementById('resultImage');
+        const loadingMessage = document.getElementById('loadingMessage');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        const fullPrompt = userPrompt + styleSuffix;
+        const encodedPrompt = encodeURIComponent(fullPrompt);
+        
+        // Pollinations.ai havolasini tuzish
+        const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${width}&height=${height}&seed=${Math.floor(Math.random() * 10000)}&nologo=true&enhance=true`;
+
+        // Interfeysni yangilash (Yuklanmoqda holati)
+        resultImage.style.display = 'none';
+        downloadBtn.style.display = 'none';
+        loadingMessage.textContent = '⏳ Image is being created, please wait...';
+        loadingMessage.style.display = 'block';
+        loadingMessage.style.color = 'var(--primary-color)';
+        resultImage.src = ''; 
+
+        // Rasmni yuklash
+        resultImage.src = imageUrl;
+
+        resultImage.onload = () => {
+            loadingMessage.style.display = 'none';
+            resultImage.style.display = 'block';
+            downloadBtn.style.display = 'block'; 
+        };
+
+        resultImage.onerror = () => {
+            loadingMessage.textContent = '❌ There was an error creating the image. Please try with different text or size..';
+            loadingMessage.style.color = 'red';
+            resultImage.style.display = 'none';
+            downloadBtn.style.display = 'none';
+        };
+    }
+
+    // "Rasm Yaratish" tugmasini bosganda ishlaydigan yangi funksiya (Reklama bilan)
+    function generateImage() {
+        const userPrompt = document.getElementById('prompt').value.trim();
+
+        if (userPrompt === "") {
+            alert("Please enter text for the image.!");
+            return;
+        }
+
+        // 1. AdsGram Controller'ni ishga tushirish (SDK yuklanganligiga ishonch hosil qilish)
+        if (window.Adsgram) {
+            const AdController = window.Adsgram.init({ blockId: "int-19147" }); // !!! BU YERGA O'ZINGIZNING ID'INGIZNI QO'YING !!!
+
+            // 2. Reklamani ko'rsatish
+            AdController.show().then((result) => {
+                // Reklama muvaffaqiyatli tugagan (foydalanuvchi ko'rdi yoki yopdi)
+                if (result.done) {
+                    createPollinationsImage(); // Muvaffaqiyatli tugagach rasm yaratishni boshlash
+                } else {
+                    alert("Reklama to'liq ko'rsatilmadi yoki o'tkazib yuborildi. Iltimos, qayta urinib ko'ring.");
+                }
+            }).catch((result) => {
+                // Reklamani ko'rsatishda xato yuz berdi (Masalan, yuklanmadi)
+                console.error("Adsgram xatosi:", result);
+                alert("Reklamani yuklashda xatolik yuz berdi. Reklamasiz yaratishga urinilmoqda.");
+                createPollinationsImage(); // Xato bo'lsa ham rasm yaratishni boshlash (alternativ yo'l)
+            });
+        } else {
+            // Agar AdsGram SDK yuklanmagan bo'lsa
+            alert("Reklama xizmati yuklanmadi. Rasm yaratishni boshlash.");
+            createPollinationsImage();
+        }
+    }
+    
+    // --- AdsGram integratsiyasi tugashi ---
+
+    // Yuklab olish funksiyasi (o'zgarishsiz qoldirildi)
+    function downloadImage() {
+        const resultImage = document.getElementById('resultImage');
+        if (resultImage.src && resultImage.style.display !== 'none') {
+            // Yangi sahifada rasmni ochishga urinish
+            window.open(resultImage.src, '_blank');
+        } else {
+            alert("No image available for download.!");
+        }
+    }
+</script>
+
+</body>
+  </html>
