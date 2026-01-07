@@ -1,317 +1,960 @@
 <!DOCTYPE html>
 <html lang="uz">
 <head>
-    <meta name="google-site-verification" content="g3wuBCS118ipXpmUl4hwAlVWPoBHbYshz4nYHoHPT30" />
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <!-- SEO TITLE -->
-    <title>Free AI Image Generator – Turn Text Into Images Online</title>
-
-    <!-- SEO DESCRIPTION -->
-    <meta name="description" content="Which AI bots can create images? Use this free AI image generator to turn text into visuals instantly. Enter a prompt, choose a style, and generate images online for free.">
-
-    <!-- SEO KEYWORDS -->
-    <meta name="keywords" content="free ai image generator, ai image creator, text to image ai, bepul rasm yaratish, suniy intellekt rasm">
-
-    <meta name="robots" content="index, follow">
-
-    <!-- Open Graph (Google / Telegram / Facebook) -->
-    <meta property="og:title" content="Free AI Image Generator – Turn Text Into Images Online">
-    <meta property="og:description" content="Create images from text using a free AI image generator. Choose styles, enter a prompt, and instantly generate visuals online.">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://azizbek2222.github.io/ai-image-creator-robot/">
-
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
-
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>✨ NeoGen</title>
+    <!-- Telegram SDK -->
+    <script src="https://telegram.org/js/telegram-web-app.js?59"></script>
+    <!-- AdsGram SDK -->
+    <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
     <style>
-        /* YANGI Ranglar palitrasi (Qizil-Sariq ohanglar) */
-        :root {
-            --primary-color: #ff9800; /* To'q Sariq (Amber) - Asosiy rang */
-            --primary-dark: #f57c00;  /* To'qroq Sariq */
-            --secondary-color: #f44336; /* Qizil - Ikkilamchi rang */
-            --bg-color: #e0e5ec; /* Yumshoq Neumorphic fon (O'zgarmadi) */
-            --text-color: #d32f2f; /* To'q Qizil/Qizg'ish matn */
-            --shadow-light: #ffffff;
-            --shadow-dark: #a3b1c6;
-        }
-
-        /* Umumiy uslublar */
-        body {
-            font-family: 'Montserrat', sans-serif;
+        * {
             margin: 0;
             padding: 0;
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        /* Neumorphic kartochka */
-        .container {
-            width: 100%;
-            max-width: 450px; /* Mobilga optimallashtirilgan torlik */
-            margin: 25px;
-            background: var(--bg-color);
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 
-                7px 7px 15px var(--shadow-dark),
-                -7px -7px 15px var(--shadow-light);
-        }
-        
-        /* Sarglavha */
-        h1 {
-            text-align: center;
-            color: var(--primary-dark);
-            margin-bottom: 25px;
-            font-weight: 700;
-            text-shadow: 1px 1px 1px var(--shadow-light);
-        }
-
-        /* Neumorphic kirish maydonlari */
-        label {
-            display: block;
-            margin-top: 15px;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: var(--text-color);
-        }
-        input[type="text"], select {
-            width: 100%;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
             box-sizing: border-box;
-            background-color: var(--bg-color);
-            box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -3px -3px 7px var(--shadow-light);
-            color: var(--text-color);
-            transition: all 0.2s ease-in-out;
-        }
-        input[type="text"]:focus, select:focus {
-            outline: none;
-            box-shadow: inset 1px 1px 2px var(--shadow-dark), inset -1px -1px 2px var(--shadow-light);
+            -webkit-tap-highlight-color: transparent;
+            font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
         }
 
-        /* Boshqaruv elementlari joylashuvi */
-        .controls {
-            display: flex;
-            flex-direction: column; 
-            gap: 15px;
-            margin-bottom: 10px;
+        body {
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(255, 0, 0, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(255, 0, 0, 0.05) 0%, transparent 50%),
+                linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
         }
 
-        /* Neumorphic tugmalar */
-        .button-style {
+        /* Hologram scanlines effect */
+        .scanlines {
+            position: fixed;
+            top: 0;
+            left: 0;
             width: 100%;
-            padding: 15px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: 700;
-            transition: all 0.2s ease-in-out;
-            margin-top: 15px;
-            box-shadow: 6px 6px 12px var(--shadow-dark), -6px -6px 12px var(--shadow-light);
-        }
-        .button-style:hover {
-            box-shadow: 4px 4px 8px var(--shadow-dark), -4px -4px 8px var(--shadow-light);
-        }
-        .button-style:active {
-            box-shadow: inset 2px 2px 5px var(--shadow-dark), inset -3px -3px 7px var(--shadow-light);
-            transform: scale(0.98);
+            height: 100%;
+            background: linear-gradient(
+                to bottom,
+                transparent 50%,
+                rgba(255, 0, 0, 0.03) 51%
+            );
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 1;
+            animation: scanlines 8s linear infinite;
         }
 
-        #generateBtn {
-            background-color: var(--primary-color);
-            color: var(--bg-color);
+        @keyframes scanlines {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(4px); }
         }
-        #downloadBtn {
-            background-color: var(--secondary-color);
-            color: var(--bg-color);
-            display: none;
+
+        .container {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            position: relative;
+            z-index: 2;
         }
-        
-        /* Natija qismi */
-        #resultContainer {
-            margin-top: 35px;
+
+        /* Premium Header */
+        .header {
             text-align: center;
-            padding-top: 20px;
-        }
-        #resultImage {
-            max-width: 100%;
-            height: auto;
-            border-radius: 12px;
-            box-shadow: 4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
-            margin: 20px auto;
-            display: none;
-        }
-        .loading {
-            color: var(--primary-color);
-            font-weight: 600;
-            display: none;
-            margin-top: 20px;
+            padding: 40px 20px 50px;
+            position: relative;
         }
 
-        /* Dizayn rasmi uchun (Avvalgi rasm qo'shilgan joydan olib tashlandi, faqat stil qoldi) */
-        #designImage {
-            width: 100%;
-            height: auto;
-            border-radius: 15px;
-            margin-bottom: 25px;
-            box-shadow: 5px 5px 10px var(--shadow-dark), -5px -5px 10px var(--shadow-light);
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #ff0000, transparent);
         }
-        
-        /* Planshet va Kompyuter uchun moslashuv */
-        @media (min-width: 768px) {
+
+        .logo {
+            font-size: 3.2rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #ffffff 0%, #ff4444 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+            letter-spacing: -2px;
+            position: relative;
+            text-shadow: 0 0 60px rgba(255, 0, 0, 0.4);
+        }
+
+        .logo::after {
+            content: 'AI';
+            position: absolute;
+            top: -10px;
+            right: -20px;
+            font-size: 1rem;
+            background: #ff0000;
+            color: #000;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 700;
+            transform: rotate(15deg);
+        }
+
+        .tagline {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-top: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .tagline::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, #ff0000, transparent);
+        }
+
+        /* Cyber Input Container */
+        .input-container {
+            background: rgba(20, 20, 20, 0.8);
+            border-radius: 20px;
+            padding: 28px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(40px);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .input-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #ff0000, transparent);
+        }
+
+        .input-group {
+            margin-bottom: 28px;
+        }
+
+        .input-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 16px;
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .label-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 0, 0, 0.1);
+            border-radius: 6px;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+        }
+
+        /* Cyber Input Field */
+        .cyber-input {
+            width: 100%;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            color: #ffffff;
+            font-size: 16px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            resize: none;
+            min-height: 64px;
+            font-weight: 500;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        .cyber-input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+            font-weight: 400;
+        }
+
+        .cyber-input:focus {
+            outline: none;
+            border-color: #ff0000;
+            background: rgba(0, 0, 0, 0.8);
+            box-shadow: 
+                0 0 0 4px rgba(255, 0, 0, 0.15),
+                0 12px 32px rgba(255, 0, 0, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .cyber-input:hover {
+            border-color: rgba(255, 0, 0, 0.3);
+        }
+
+        /* Cyber Generate Button */
+        .cyber-button {
+            width: 100%;
+            padding: 24px;
+            background: linear-gradient(135deg, #000000 0%, #111111 100%);
+            border: none;
+            border-radius: 18px;
+            color: #ffffff;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            margin: 30px 0;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            overflow: hidden;
+            border: 1px solid rgba(255, 0, 0, 0.2);
+            box-shadow: 
+                0 12px 40px rgba(0, 0, 0, 0.6),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .cyber-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 18px;
+            padding: 2px;
+            background: linear-gradient(135deg, #ff0000, #ff4444, #ff0000);
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0.8;
+            animation: borderShimmer 3s linear infinite;
+        }
+
+        .cyber-button::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                45deg,
+                transparent 30%,
+                rgba(255, 255, 255, 0.1) 50%,
+                transparent 70%
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes borderShimmer {
+            0% { filter: hue-rotate(0deg); }
+            100% { filter: hue-rotate(360deg); }
+        }
+
+        @keyframes shine {
+            0% { transform: rotate(45deg) translateX(-100%); }
+            100% { transform: rotate(45deg) translateX(100%); }
+        }
+
+        .cyber-button:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 
+                0 20px 50px rgba(255, 0, 0, 0.3),
+                0 8px 24px rgba(0, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        }
+
+        .cyber-button:active {
+            transform: translateY(-1px) scale(0.99);
+            transition: transform 0.1s;
+        }
+
+        .cyber-button.loading {
+            background: linear-gradient(135deg, #111, #222);
+            cursor: not-allowed;
+        }
+
+        .cyber-button.loading::before {
+            animation: none;
+            background: linear-gradient(135deg, #444, #666);
+        }
+
+        .btn-text {
+            position: relative;
+            z-index: 2;
+            background: linear-gradient(135deg, #ffffff, #ff9999);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .loading-spinner {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 28px;
+            height: 28px;
+            border: 3px solid rgba(255, 255, 255, 0.1);
+            border-top: 3px solid #ff0000;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+            z-index: 3;
+        }
+
+        @keyframes spin {
+            0% { transform: translate(-50%, -50%) rotate(0deg); }
+            100% { transform: translate(-50%, -50%) rotate(360deg); }
+        }
+
+        /* Cyber Result Section */
+        .result-section {
+            display: none;
+            animation: cyberFadeIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes cyberFadeIn {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px) scale(0.95);
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .image-frame {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(10, 10, 10, 0.6);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 
+                0 16px 48px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+        }
+
+        .image-frame::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 20px;
+            padding: 2px;
+            background: linear-gradient(135deg, #ff0000, transparent);
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .image-frame:hover {
+            transform: translateY(-8px) scale(1.02);
+            border-color: rgba(255, 0, 0, 0.3);
+            box-shadow: 
+                0 24px 64px rgba(255, 0, 0, 0.25),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .generated-image {
+            width: 100%;
+            display: block;
+            cursor: zoom-in;
+            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .image-frame:hover .generated-image {
+            transform: scale(1.05);
+        }
+
+        /* Cyber Action Buttons */
+        .action-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .action-button {
+            padding: 18px;
+            border: none;
+            border-radius: 16px;
+            background: rgba(20, 20, 20, 0.8);
+            color: #ffffff;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+        }
+
+        .action-button::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .action-button:hover {
+            background: rgba(30, 30, 30, 0.9);
+            border-color: rgba(255, 0, 0, 0.3);
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 
+                0 12px 32px rgba(255, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+
+        .action-button:hover::before {
+            opacity: 1;
+        }
+
+        .action-button:active {
+            transform: translateY(-1px) scale(0.99);
+        }
+
+        /* Cyber Modal */
+        .cyber-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.98);
+            backdrop-filter: blur(30px);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            animation: cyberModalIn 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes cyberModalIn {
+            from { 
+                opacity: 0; 
+                backdrop-filter: blur(0px);
+            }
+            to { 
+                opacity: 1; 
+                backdrop-filter: blur(30px);
+            }
+        }
+
+        .modal-image {
+            max-width: 100%;
+            max-height: 90vh;
+            border-radius: 16px;
+            box-shadow: 
+                0 32px 96px rgba(255, 0, 0, 0.3),
+                0 8px 32px rgba(0, 0, 0, 0.5);
+            animation: cyberZoomIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        @keyframes cyberZoomIn {
+            from { 
+                transform: scale(0.8) rotateX(10deg); 
+                opacity: 0; 
+            }
+            to { 
+                transform: scale(1) rotateX(0); 
+                opacity: 1; 
+            }
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(20, 20, 20, 0.9);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-close:hover {
+            background: #ff0000;
+            color: #000000;
+            transform: rotate(90deg) scale(1.1);
+            box-shadow: 0 8px 24px rgba(255, 0, 0, 0.4);
+        }
+
+        /* Cyber Toast */
+        .cyber-toast {
+            position: fixed;
+            top: 30px;
+            left: 50%;
+            transform: translateX(-50%) translateY(-120px);
+            background: rgba(10, 10, 10, 0.95);
+            color: white;
+            padding: 16px 28px;
+            border-radius: 14px;
+            z-index: 1001;
+            font-weight: 600;
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 0, 0, 0.4);
+            box-shadow: 
+                0 16px 48px rgba(255, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: cyberToastIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            font-size: 0.9rem;
+            text-align: center;
+            min-width: 280px;
+        }
+
+        @keyframes cyberToastIn {
+            to { transform: translateX(-50%) translateY(0); }
+        }
+
+        @keyframes cyberToastOut {
+            to { transform: translateX(-50%) translateY(-120px); opacity: 0; }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
             .container {
-                max-width: 600px;
+                padding: 16px;
             }
-            .controls {
-                flex-direction: row;
+            
+            .logo {
+                font-size: 2.8rem;
             }
-            .controls > div {
-                flex: 1;
+            
+            .input-container {
+                padding: 24px;
+            }
+            
+            .cyber-button {
+                padding: 22px;
+                font-size: 1rem;
+            }
+            
+            .action-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Scrollbar Cyber Style */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(10, 10, 10, 0.5);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(135deg, #ff0000, #ff4444);
+            border-radius: 5px;
+            border: 2px solid rgba(10, 10, 10, 0.5);
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: linear-gradient(135deg, #ff2222, #ff6666);
+        }
+
+        /* Haptic feedback for mobile */
+        @media (hover: none) and (pointer: coarse) {
+            .cyber-button:active,
+            .action-button:active {
+                transform: scale(0.98);
+            }
+        }
+
+        /* Telegram Web App theme sync */
+        :root {
+            --tg-red: #ff0000;
+            --tg-bg: #000000;
+            --tg-text: #ffffff;
+        }
+
+        .tg-theme {
+            background: var(--tg-theme-bg-color, var(--tg-bg));
+            color: var(--tg-theme-text-color, var(--tg-text));
+        }
+
+        /* Subtle particle effect */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(255, 0, 0, 0.3);
+            border-radius: 50%;
+            animation: particleFloat 15s infinite linear;
+        }
+
+        @keyframes particleFloat {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(100px);
+                opacity: 0;
             }
         }
     </style>
-    <script src="https://sad.adsgram.ai/js/sad.min.js"></script>
 </head>
 <body>
-
-<div class="container">
-    <h1>🎨 AI Image Creator</h1>
-
-
-
-    <label for="prompt">Image Text (Prompt):</label>
-    <input type="text" id="prompt" placeholder="Misol: Tungi shaharda uchib ketayotgan ajdaho, neon yorug'lik">
-
-    <div class="controls">
-        <div>
-            <label for="style">Select Image Style:</label>
-            <select id="style">
-                <option value=", hyperrealistic, cinematic lighting, 8k">Realistic (Hyperrealistic)</option>
-                <option value=", anime, manga style, vibrant colors">Anime (Manga Style)</option>
-                <option value=", oil painting, masterpiece, artistic">Art (Oil Painting)</option>
-                <option value=", fantasy art, dramatic lighting, epic">Fantasy (Epic Fantasy)</option>
-            </select>
-        </div>
-        <div>
-            <label for="size">Image Size:</label>
-            <select id="size">
-                <option value="512x512">Square (512x512)</option>
-                <option value="768x512">Landscape (768x512)</option>
-                <option value="512x768">Portrait (512x768)</option>
-                <option value="1024x1024">High quality (1024x1024)</option>
-            </select>
-        </div>
-    </div>
-
-    <button id="generateBtn" class="button-style" onclick="generateImage()">🚀 CREATING A PICTURE</button>
-
-    <div id="resultContainer">
-        <p class="loading" id="loadingMessage">⏳ Image is being created, please wait....</p>
-        <img id="resultImage" alt="The created image will appear here">
-        <button id="downloadBtn" class="button-style" onclick="downloadImage()">⬇️ DOWNLOAD IMAGE</button>
-        <p style="margin-top: 15px; font-size: 14px; color: #757575;">*If the download button doesn't work, long press on the image and select "Save image".</p>
-    </div>
-</div>
-
-<script>
-    // --- AdsGram integratsiyasi boshlanishi ---
+    <div class="scanlines"></div>
+    <div class="particles" id="particles"></div>
     
-    // Asosiy rasm yaratish logikasini alohida funksiyaga o'tkazamiz
-    function createPollinationsImage() {
-        const userPrompt = document.getElementById('prompt').value.trim();
-        const styleSuffix = document.getElementById('style').value;
-        const sizeValue = document.getElementById('size').value;
-        const [width, height] = sizeValue.split('x');
+    <div class="container">
+        <header class="header">
+            <div class="logo">Yomon Ekan</div>
+            <div class="tagline">Texnologiya - Pollinations.ai</div>
+        </header>
 
-        const resultImage = document.getElementById('resultImage');
-        const loadingMessage = document.getElementById('loadingMessage');
-        const downloadBtn = document.getElementById('downloadBtn');
+        <div class="input-container">
+            <div class="input-group">
+                <label class="input-label">
+                    <span class="label-icon">✨</span>
+                    <span>Oʻz tasavvuringizni tasvirlab bering:</span>
+                </label>
+                <textarea 
+                    class="cyber-input" 
+                    id="promptInput" 
+                    placeholder="Quyosh botishi paytidagi hayratlanarli togʻ manzarasi, uzoqda esa neon chiroqlar bilan yoritilgan kiberpank shahar..."
+                    rows="3"
+                ></textarea>
+            </div>
 
-        const fullPrompt = userPrompt + styleSuffix;
-        const encodedPrompt = encodeURIComponent(fullPrompt);
-        
-        // Pollinations.ai havolasini tuzish
-        const imageUrl = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${width}&height=${height}&seed=${Math.floor(Math.random() * 10000)}&nologo=true&enhance=true`;
+            <div class="input-group">
+                <label class="input-label">
+                    <span class="label-icon">⛔</span>
+                    <span>Chiqarib tashlanadigan elementlar</span>
+                </label>
+                <textarea 
+                    class="cyber-input" 
+                    id="negativeInput" 
+                    placeholder="Past sifatli, xira (loyqa), suv belgilar, matn..."
+                    rows="2"
+                ></textarea>
+            </div>
+        </div>
 
-        // Interfeysni yangilash (Yuklanmoqda holati)
-        resultImage.style.display = 'none';
-        downloadBtn.style.display = 'none';
-        loadingMessage.textContent = '⏳ Image is being created, please wait...';
-        loadingMessage.style.display = 'block';
-        loadingMessage.style.color = 'var(--primary-color)';
-        resultImage.src = ''; 
+        <button class="cyber-button" id="generateBtn">
+            <span class="btn-text">
+                <span>⚡</span>
+                <span>Rasm yaratish</span>
+            </span>
+            <div class="loading-spinner"></div>
+        </button>
 
-        // Rasmni yuklash
-        resultImage.src = imageUrl;
+        <div class="result-section" id="resultSection">
+            <div class="image-frame">
+                <img class="generated-image" id="generatedImage" alt="Generated Art">
+            </div>
+            <div class="action-grid">
+                <a class="action-button" id="downloadBtn" download>
+                    <span>⬇️</span>
+                    <span>Yuklab olish</span>
+                </a>
+                <button class="action-button" id="shareBtn">
+                    <span>📤</span>
+                    <span>Ulashish</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
-        resultImage.onload = () => {
-            loadingMessage.style.display = 'none';
-            resultImage.style.display = 'block';
-            downloadBtn.style.display = 'block'; 
-        };
+    <div class="cyber-modal" id="imageModal">
+        <button class="modal-close" id="modalClose">×</button>
+        <img class="modal-image" id="modalImage" alt="Full Preview">
+    </div>
 
-        resultImage.onerror = () => {
-            loadingMessage.textContent = '❌ There was an error creating the image. Please try with different text or size..';
-            loadingMessage.style.color = 'red';
-            resultImage.style.display = 'none';
-            downloadBtn.style.display = 'none';
-        };
+    <script>
+    // Adsgram Controller-ni sozlash
+    // "your-block-id" o'rniga o'zingizning Adsgram blockId-ingizni qo'ying
+    const AdController = window.Adsgram.init({ blockId: "int-7685" }); 
+
+    let currentImageUrl = '';
+
+    document.addEventListener('DOMContentLoaded', function() {
+        createParticles();
+        initializeApp();
+    });
+
+    function createParticles() {
+        const particles = document.getElementById('particles');
+        for (let i = 0; i < 30; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.animationDelay = `${Math.random() * 15}s`;
+            particles.appendChild(particle);
+        }
     }
 
-    // "Rasm Yaratish" tugmasini bosganda ishlaydigan yangi funksiya (Reklama bilan)
-    function generateImage() {
-        const userPrompt = document.getElementById('prompt').value.trim();
+    function initializeApp() {
+        // Asosiy tugma bosilganda reklamani tekshirish funksiyasini chaqiramiz
+        document.getElementById('generateBtn').addEventListener('click', handleGenerateWithAd);
+        document.getElementById('downloadBtn').addEventListener('click', downloadImage);
+        document.getElementById('shareBtn').addEventListener('click', shareImage);
+        initializeModal();
+    }
 
-        if (userPrompt === "") {
-            alert("Please enter text for the image.!");
+    // Reklamani ko'rsatish va natijaga qarab rasm yaratishni boshlash
+    async function handleGenerateWithAd() {
+        const promptInput = document.getElementById('promptInput').value.trim();
+        if (!promptInput) {
+            showToast('Iltimos, tasavvuringizni yozing!', 'error');
+            hapticFeedback('heavy');
             return;
         }
 
-        // 1. AdsGram Controller'ni ishga tushirish (SDK yuklanganligiga ishonch hosil qilish)
-        if (window.Adsgram) {
-            const AdController = window.Adsgram.init({ blockId: "int-19147" }); // !!! BU YERGA O'ZINGIZNING ID'INGIZNI QO'YING !!!
+        hapticFeedback('medium');
+        showToast('Reklama yuklanmoqda...', 'success');
 
-            // 2. Reklamani ko'rsatish
-            AdController.show().then((result) => {
-                // Reklama muvaffaqiyatli tugagan (foydalanuvchi ko'rdi yoki yopdi)
-                if (result.done) {
-                    createPollinationsImage(); // Muvaffaqiyatli tugagach rasm yaratishni boshlash
-                } else {
-                    alert("Reklama to'liq ko'rsatilmadi yoki o'tkazib yuborildi. Iltimos, qayta urinib ko'ring.");
-                }
-            }).catch((result) => {
-                // Reklamani ko'rsatishda xato yuz berdi (Masalan, yuklanmadi)
-                console.error("Adsgram xatosi:", result);
-                alert("Reklamani yuklashda xatolik yuz berdi. Reklamasiz yaratishga urinilmoqda.");
-                createPollinationsImage(); // Xato bo'lsa ham rasm yaratishni boshlash (alternativ yo'l)
-            });
-        } else {
-            // Agar AdsGram SDK yuklanmagan bo'lsa
-            alert("Reklama xizmati yuklanmadi. Rasm yaratishni boshlash.");
-            createPollinationsImage();
+        try {
+            // Reklamani ishga tushirish
+            const result = await AdController.show();
+            
+            // Foydalanuvchi reklamani oxirigacha ko'rgan bo'lsa
+            if (result.done) {
+                showToast('Rahmat! Rasm yaratishni boshladik...', 'success');
+                generateImage(); // Rasm yaratish funksiyasini chaqiramiz
+            } else {
+                // Foydalanuvchi reklamani yopib yuborsa yoki ko'rmasa
+                showToast('Rasm yaratish uchun reklamani koʻrishingiz kerak', 'error');
+            }
+        } catch (error) {
+            // Reklama yuklashda xatolik bo'lsa (masalan, Adblock yoki server xatosi)
+            console.error('Ad Error:', error);
+            showToast('Reklama xatosi. Tekshirib qaytadan urinib koʻring.', 'error');
+            
+            // Xatolik bo'lganda ham rasm yaratishga ruxsat berishni xohlasangiz 
+            // pastdagi generateImage() ni ochib qo'ying:
+            // generateImage(); 
         }
     }
-    
-    // --- AdsGram integratsiyasi tugashi ---
 
-    // Yuklab olish funksiyasi (o'zgarishsiz qoldirildi)
-    function downloadImage() {
-        const resultImage = document.getElementById('resultImage');
-        if (resultImage.src && resultImage.style.display !== 'none') {
-            // Yangi sahifada rasmni ochishga urinish
-            window.open(resultImage.src, '_blank');
-        } else {
-            alert("No image available for download.!");
+    async function generateImage() {
+        const promptInput = document.getElementById('promptInput').value.trim();
+        const negativeInput = document.getElementById('negativeInput').value.trim();
+
+        setLoadingState(true);
+
+        try {
+            let fullPrompt = promptInput;
+            fullPrompt += ', masterpiece, ultra detailed, 8k resolution, cinematic lighting';
+
+            const baseUrl = 'https://image.pollinations.ai/prompt/';
+            const params = new URLSearchParams({
+                width: '1024',
+                height: '1024',
+                seed: Math.floor(Math.random() * 1000000),
+                nologo: 'true',
+                enhance: 'true'
+            });
+
+            if (negativeInput) {
+                fullPrompt += ` [negative: ${negativeInput}]`;
+            }
+
+            const imageUrl = baseUrl + encodeURIComponent(fullPrompt) + '?' + params.toString();
+
+            const img = new Image();
+            img.src = imageUrl;
+            
+            // Decode yordamida yuklanishini kutamiz
+            await img.decode(); 
+
+            displayResult(imageUrl);
+            showToast('✨ Rasm tayyor!', 'success');
+            hapticFeedback('heavy');
+
+        } catch (error) {
+            console.error('Generation Error:', error);
+            showToast('Xatolik yuz berdi. Qayta urinib koʻring.', 'error');
+        } finally {
+            setLoadingState(false);
         }
+    }
+
+    function initializeModal() {
+        const modal = document.getElementById('imageModal');
+        const modalClose = document.getElementById('modalClose');
+        const generatedImage = document.getElementById('generatedImage');
+
+        generatedImage.addEventListener('click', function() {
+            document.getElementById('modalImage').src = this.src;
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', function(e) {
+            if (e.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeModal();
+        });
+    }
+
+    function closeModal() {
+        const modal = document.getElementById('imageModal');
+        modal.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }
+
+    function hapticFeedback(type = 'medium') {
+        if ('vibrate' in navigator) {
+            const patterns = {
+                light: [10],
+                medium: [20],
+                heavy: [30, 20, 30]
+            };
+            navigator.vibrate(patterns[type]);
+        }
+    }
+
+    function displayResult(imageUrl) {
+        const resultSection = document.getElementById('resultSection');
+        const generatedImage = document.getElementById('generatedImage');
+        const downloadBtn = document.getElementById('downloadBtn');
+
+        generatedImage.src = imageUrl;
+        downloadBtn.href = imageUrl;
+        
+        resultSection.style.display = 'block';
+        currentImageUrl = imageUrl;
+
+        setTimeout(() => {
+            resultSection.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 100);
+    }
+
+    function setLoadingState(loading) {
+        const generateBtn = document.getElementById('generateBtn');
+        const btnText = generateBtn.querySelector('.btn-text');
+        const loadingSpinner = generateBtn.querySelector('.loading-spinner');
+
+        if (loading) {
+            generateBtn.classList.add('loading');
+            generateBtn.disabled = true;
+            btnText.innerHTML = '<span>⏳</span><span>Yaratilmoqda...</span>';
+            loadingSpinner.style.display = 'block';
+        } else {
+            generateBtn.classList.remove('loading');
+            generateBtn.disabled = false;
+            btnText.innerHTML = '<span>⚡</span><span>Rasm yaratish</span>';
+            loadingSpinner.style.display = 'none';
+        }
+    }
+
+    function showToast(message, type = 'success') {
+        const toast = document.createElement('div');
+        toast.className = 'cyber-toast';
+        toast.style.borderColor = type === 'error' ? '#ff4040' : '#00ff80';
+        toast.innerHTML = message;
+        document.body.appendChild(toast);
+
+        setTimeout(() => {
+            toast.style.animation = 'cyberToastOut 0.4s forwards';
+            setTimeout(() => toast.remove(), 400);
+        }, 3000);
+    }
+
+    async function downloadImage() {
+        if (!currentImageUrl) return;
+        showToast('📥 Yuklanmoqda...', 'success');
+        const a = document.createElement('a');
+        a.href = currentImageUrl;
+        a.download = `neogen-${Date.now()}.jpg`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    }
+
+    async function shareImage() {
+        if (!currentImageUrl) return;
+        if (navigator.share) {
+            try {
+                await navigator.share({ title: 'NeoGen AI', url: currentImageUrl });
+            } catch (e) {}
+        } else {
+            navigator.clipboard.writeText(currentImageUrl);
+            showToast('🔗 Havola nusxalandi!', 'success');
+        }
+    }
+
+    if (window.Telegram && window.Telegram.WebApp) {
+        Telegram.WebApp.ready();
     }
 </script>
 
+
 </body>
-  </html>
+</html>
