@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>✨ NeoGen</title>
+    <title>✨ free image creator robot</title>
     <!-- Telegram SDK -->
     <script src="https://telegram.org/js/telegram-web-app.js?59"></script>
     <!-- AdsGram SDK -->
@@ -671,20 +671,20 @@
     
     <div class="container">
         <header class="header">
-            <div class="logo">Yomon Ekan</div>
-            <div class="tagline">Texnologiya - Pollinations.ai</div>
+            <div class="logo">FREE IMAGE CREATOR BOT</div>
+            <div class="tagline">Technology - FREE AI</div>
         </header>
 
         <div class="input-container">
             <div class="input-group">
                 <label class="input-label">
                     <span class="label-icon">✨</span>
-                    <span>Oʻz tasavvuringizni tasvirlab bering:</span>
+                    <span>Describe your vision:</span>
                 </label>
                 <textarea 
                     class="cyber-input" 
                     id="promptInput" 
-                    placeholder="Quyosh botishi paytidagi hayratlanarli togʻ manzarasi, uzoqda esa neon chiroqlar bilan yoritilgan kiberpank shahar..."
+                    placeholder="A stunning mountain view at sunset, with a cyberpunk city lit up with neon lights in the distance..."
                     rows="3"
                 ></textarea>
             </div>
@@ -692,12 +692,12 @@
             <div class="input-group">
                 <label class="input-label">
                     <span class="label-icon">⛔</span>
-                    <span>Chiqarib tashlanadigan elementlar</span>
+                    <span>Removable elements</span>
                 </label>
                 <textarea 
                     class="cyber-input" 
                     id="negativeInput" 
-                    placeholder="Past sifatli, xira (loyqa), suv belgilar, matn..."
+                    placeholder="Low quality, blurry, watermarks, text..."
                     rows="2"
                 ></textarea>
             </div>
@@ -706,7 +706,7 @@
         <button class="cyber-button" id="generateBtn">
             <span class="btn-text">
                 <span>⚡</span>
-                <span>Rasm yaratish</span>
+                <span>Create a picture</span>
             </span>
             <div class="loading-spinner"></div>
         </button>
@@ -718,11 +718,11 @@
             <div class="action-grid">
                 <a class="action-button" id="downloadBtn" download>
                     <span>⬇️</span>
-                    <span>Yuklab olish</span>
+                    <span>Download</span>
                 </a>
                 <button class="action-button" id="shareBtn">
                     <span>📤</span>
-                    <span>Ulashish</span>
+                    <span>Sharing</span>
                 </button>
             </div>
         </div>
@@ -768,13 +768,13 @@
     async function handleGenerateWithAd() {
         const promptInput = document.getElementById('promptInput').value.trim();
         if (!promptInput) {
-            showToast('Iltimos, tasavvuringizni yozing!', 'error');
+            showToast('Please write your imagination!', 'error');
             hapticFeedback('heavy');
             return;
         }
 
         hapticFeedback('medium');
-        showToast('Reklama yuklanmoqda...', 'success');
+        showToast('Loading advertisement...', 'success');
 
         try {
             // Reklamani ishga tushirish
@@ -782,16 +782,16 @@
             
             // Foydalanuvchi reklamani oxirigacha ko'rgan bo'lsa
             if (result.done) {
-                showToast('Rahmat! Rasm yaratishni boshladik...', 'success');
+                showToast('Thank you! We have started creating a picture....', 'success');
                 generateImage(); // Rasm yaratish funksiyasini chaqiramiz
             } else {
                 // Foydalanuvchi reklamani yopib yuborsa yoki ko'rmasa
-                showToast('Rasm yaratish uchun reklamani koʻrishingiz kerak', 'error');
+                showToast('You need to watch an ad to create a picture.', 'error');
             }
         } catch (error) {
             // Reklama yuklashda xatolik bo'lsa (masalan, Adblock yoki server xatosi)
             console.error('Ad Error:', error);
-            showToast('Reklama xatosi. Tekshirib qaytadan urinib koʻring.', 'error');
+            showToast('Advertising error. Please check and try again..', 'error');
             
             // Xatolik bo'lganda ham rasm yaratishga ruxsat berishni xohlasangiz 
             // pastdagi generateImage() ni ochib qo'ying:
@@ -831,12 +831,12 @@
             await img.decode(); 
 
             displayResult(imageUrl);
-            showToast('✨ Rasm tayyor!', 'success');
+            showToast('✨ The picture is ready!', 'success');
             hapticFeedback('heavy');
 
         } catch (error) {
             console.error('Generation Error:', error);
-            showToast('Xatolik yuz berdi. Qayta urinib koʻring.', 'error');
+            showToast('An error occurred. Please try again..', 'error');
         } finally {
             setLoadingState(false);
         }
@@ -904,12 +904,12 @@
         if (loading) {
             generateBtn.classList.add('loading');
             generateBtn.disabled = true;
-            btnText.innerHTML = '<span>⏳</span><span>Yaratilmoqda...</span>';
+            btnText.innerHTML = '<span>⏳</span><span>Creating...</span>';
             loadingSpinner.style.display = 'block';
         } else {
             generateBtn.classList.remove('loading');
             generateBtn.disabled = false;
-            btnText.innerHTML = '<span>⚡</span><span>Rasm yaratish</span>';
+            btnText.innerHTML = '<span>⚡</span><span>Create a picture</span>';
             loadingSpinner.style.display = 'none';
         }
     }
@@ -929,7 +929,7 @@
 
     async function downloadImage() {
         if (!currentImageUrl) return;
-        showToast('📥 Yuklanmoqda...', 'success');
+        showToast('📥 Loading...', 'success');
         const a = document.createElement('a');
         a.href = currentImageUrl;
         a.download = `neogen-${Date.now()}.jpg`;
@@ -942,11 +942,11 @@
         if (!currentImageUrl) return;
         if (navigator.share) {
             try {
-                await navigator.share({ title: 'NeoGen AI', url: currentImageUrl });
+                await navigator.share({ title: 'free image creator robot', url: currentImageUrl });
             } catch (e) {}
         } else {
             navigator.clipboard.writeText(currentImageUrl);
-            showToast('🔗 Havola nusxalandi!', 'success');
+            showToast('🔗 Link copied!', 'success');
         }
     }
 
